@@ -1,6 +1,10 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 body {
   min-height: 100vh;
   padding-bottom: 50px;
+  
 }
 .card {
   opacity: 0.9;
