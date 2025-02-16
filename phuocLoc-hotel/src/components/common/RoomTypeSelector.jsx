@@ -4,23 +4,20 @@ import PropTypes from "prop-types";
 import { getRoomTypes } from "../utils/ApiFunctions";
 
 const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
-  const [roomTypes, setRoomTypes] = useState([]);
+  const [roomTypes, setRoomTypes] = useState([""]);
   const [showNewRoomTypesInput, setShowNewRoomTypesInput] = useState(false);
   const [newRoomTypes, setNewRoomTypes] = useState("");
 
   useEffect(() => {
     getRoomTypes()
       .then((data) => {
-        if (Array.isArray(data)) {
-          setRoomTypes(data);
-        } else {
-          console.error("Invalid data format received from API");
-        }
+        setRoomTypes(data);
       })
-      .catch((error) => console.error("Error fetching room types:", error));
+        
   }, []);
 
   const handleNewRoomTypeInputChange = (e) => {
+    console.log("setNewRoomTypes(e.target.value)");
     setNewRoomTypes(e.target.value);
   };
 
@@ -34,18 +31,18 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
 
   return (
     <>
-      {roomTypes.length > 0 || (
+      {roomTypes.length > 0 && (
         <div>
         <select
         id="roomType"
         name="roomType"
         className="form-select"
-        value={newRoom.roomType}
+        value={newRoom.roomType || ""}
         onChange={(e) => {
             if (e.target.value === "Add New") {
-            setShowNewRoomTypesInput(true);
+                setShowNewRoomTypesInput(true);
             } else {
-            handleRoomInputChange(e);
+                handleRoomInputChange(e);
             }
         }}
         >
