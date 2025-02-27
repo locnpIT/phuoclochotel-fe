@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios'
 
 export const api = axios.create({
@@ -31,4 +32,12 @@ export async function getRoomTypes(){
     }       
 }
 
-
+// This function gets all rooms from database
+export async function getAllRooms(){
+    try {
+        const result = await api.get("/rooms/all-rooms");
+        return result.data
+    } catch (error) {
+        throw new Error("Error fetching rooms")
+    }
+}
